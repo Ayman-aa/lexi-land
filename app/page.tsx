@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Map from '@/app/Components/Map'
 
 export default function Home() {
