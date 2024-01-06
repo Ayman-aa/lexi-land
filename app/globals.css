@@ -8,6 +8,72 @@ body {
   background: linear-gradient(to bottom, #40c0f5 0%, #ADD8E6 100%);
 }
 
-.Mymap{
+.Game {
+  background-image: url('../public/image0.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  position: absolute;
+  top: 18px;
+  left: 4cm;
+  width: calc(90% - 4cm);
+  height: calc(100% - 30px);
+  border-radius: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.word, .letter {
+  height: 146%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.letter {
+  height: 53%;
+}
+
+.letter p {
+  font-size: calc(1cm + 3px);
+  color: white;
+}
+
+.letter p:hover
+{
+  color: black;
+}
+
+.word p {
+  font-size: calc(2cm - 11px);
+  background: linear-gradient(to bottom, #40c0f5 0%, #00a6dc 100%);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-left: 41px; */
+  border-radius: 17px;
+  cursor: pointer;
+  padding: 0 13px;
+  color: white;
+  margin-left: 30px;
+}
+
+
+.div-letter {
+  background: linear-gradient(to bottom, #40c0f5 0%, #ADD8E6 100%);
+  width: 3cm;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 41px;
+  border-radius: 17px;
+  cursor: pointer;
+}
+
+#clickword
+{
+  cursor: pointer;
 }

@@ -2,9 +2,11 @@
 import React from "react";
 import Mapsvg from "./Mapsvg";
 import { useEffect, useState } from 'react'
+import Game from "./Game";
 
 export default function Map()
 {
+    const [select, setselect] = useState(0);
     const Levels = Array()
   const levelCount = 40
   useEffect(() => {
@@ -23,14 +25,27 @@ export default function Map()
                 level.children[1]!.setAttribute("fill", color)
               }
             })
-            level.children[1]!.setAttribute("fill", "#FFFFFF")
           }
         }
+        Levels.forEach((element) => {
+            element.level.addEventListener('click', () => {
+                element.setColor('#0000');
+                setselect(1);
+            })
+        })
     }
-  })
+  }, []);
+   
     return (
         <>
+            <div>
             <Mapsvg></Mapsvg>
+            </div>
+            {select == 1 && (
+              <>
+              <Game />
+              </>
+            )}
         </>
     )
 }
