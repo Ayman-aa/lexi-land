@@ -61,6 +61,50 @@ body {
   margin-left: 30px;
 }
 
+.game-level {
+  /* display: flex; */
+  justify-content: flex-start;
+  margin-top: 15px;
+  background: #ffda8c;
+  /* padding: 9px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 43px;
+  height: 43px;
+  box-shadow: 1px black;
+}
+
+.game-level span {
+  font-size: 28px;
+  font-weight: 600;
+  color: white;
+  margin-right: 3px;
+}
+
+.close-level {
+  /* display: flex; */
+  justify-content: flex-start;
+  margin-top: -40px;
+  margin-right: -900px;
+  background: #ffda8c;
+  /* padding: 9px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 45px;
+  height: 60px;
+  box-shadow: 1px black;
+  cursor: pointer;
+}
+
+.close-level span {
+  font-size: 28px;
+  font-weight: 600;
+  color: white;
+}
 
 .div-letter {
   background: linear-gradient(to bottom, #40c0f5 0%, #ADD8E6 100%);

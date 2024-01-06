@@ -2,9 +2,12 @@
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-interface GameProps {}
+interface GameProps {
+    level: number;
+    onClose: () => void;
+}
 
-const Game: React.FC<GameProps> = () => {
+const Game: React.FC<GameProps> = ({ level, onClose }: GameProps) => {
     const correct = "ANIMAL"
   const [word, setWord] = useState<string[]>([]);
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
@@ -44,13 +47,19 @@ const Game: React.FC<GameProps> = () => {
             toast.success('congratulations!');
         }
         else 
-            toast.error("Incorrect world");
+            toast.error("Incorrect word!");
     }
 };
 
   return (
     <>
       <div className="Game">
+        <div className="game-level">
+            <span>{level}</span>
+        </div>
+        <div className="close-level" onClick={onClose}>
+            <span>X</span>
+        </div>
         <div className="word">
         </div>
         <div className="letter">

@@ -7,8 +7,14 @@ import Game from "./Game";
 export default function Map()
 {
     const [select, setselect] = useState(0);
+    const [mylevel, setmylevel] = useState(1);
     const Levels = Array()
   const levelCount = 40
+
+  const closeModal = () => {
+    setselect(0);
+  };
+
   useEffect(() => {
     if (Levels.length == 0)
     {
@@ -29,7 +35,8 @@ export default function Map()
         }
         Levels.forEach((element) => {
             element.level.addEventListener('click', () => {
-                element.setColor('#0000');
+                // element.setColor('#0000');
+                setmylevel(parseInt(element.level.id.split(" ")[1]));
                 setselect(1);
             })
         })
@@ -43,7 +50,7 @@ export default function Map()
             </div>
             {select == 1 && (
               <>
-              <Game />
+              <Game level={mylevel} onClose={closeModal} />
               </>
             )}
         </>
