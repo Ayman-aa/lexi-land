@@ -1,4 +1,10 @@
-<svg width="1800" height="1080" viewBox="0 0 1800 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+import React from "react";
+
+export default function Mapsvg()
+{
+    return (
+        <>
+             <svg id="svgMap" width="1500" height="680" viewBox="0 0 1800 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="page1">
 <path id="Vector" d="M120 923L134.364 926.455L139.6 932L147.24 927.515L159 923L143.949 924.848L141.346 927.515L137.654 924.152L120 923Z" fill="#43303F"/>
 <g id="pile">
@@ -1366,3 +1372,7 @@
 </linearGradient>
 </defs>
 </svg>
+
+        </>
+    )
+}
