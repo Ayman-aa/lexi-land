@@ -11,7 +11,9 @@ interface GameProps {
 }
 
 const Game: React.FC<GameProps> = ({ gameState, setGameState, level, onClose }: GameProps) => {
-  const correct = useMemo(() => generateWord(gameState, level), [gameState, level]);
+  const correctObj = useMemo(() => generateWord(gameState, level), [gameState, level])
+  const correct = correctObj.value;
+  const hint = correctObj.hint;
   const [finishTime, setFinishTime] = useState<number>(0);
   const [word, setWord] = useState<string[]>([]);
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
@@ -63,6 +65,9 @@ const Game: React.FC<GameProps> = ({ gameState, setGameState, level, onClose }: 
 
   return (
     <>
+      <div className="pirate">
+        <img src="cartoon-pirate-boy-holding-a-sword-vector.png"></img>
+      </div>
       <div className="Game">
         <div className="game-level">
           <span>{level}</span>
@@ -70,6 +75,7 @@ const Game: React.FC<GameProps> = ({ gameState, setGameState, level, onClose }: 
         <div className="close-level" onClick={onClose}>
           <span>X</span>
         </div>
+        <div className="text-blue-500" id="myhint">{hint}</div>
         <div className="word"></div>
         <div className="letter">
           {word?.map((letter, index) => (

@@ -1,4 +1,6 @@
-import words from '../data/words.json';
+import wordList from '../data/words.json';
+
+const words = wordList.words
 
 const map = (
     value: number,
@@ -38,7 +40,7 @@ export default function generateWord(gameState: any, level: number) {
     let avgTime = finishedTimeList[0];
     if (finishedTimeList.length > 1)
         avgTime = finishedTimeList.reduce((a: number, b: number) => a + b) / finishedTimeList.length;
-    const wordIndex = map(avgTime, 60, 0, 0, words.length);
+    const wordIndex = map(avgTime, 30, 0, 0, words.length);
     console.log(finishedTimeList, wordIndex, avgTime)
     return words[wordIndex];
 };

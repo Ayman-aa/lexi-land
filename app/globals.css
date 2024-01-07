@@ -22,6 +22,31 @@ body {
   align-items: center;
 }
 
+.pirate {
+  position: absolute;
+  z-index: 2;
+  bottom: 3cm;
+  left: 30cm;
+}
+
+#myhint {
+  position: absolute;
+  bottom: 10cm;
+  left: 21cm;
+  z-index: 3;
+  font-size: 10px;
+  color: black;
+  font-weight: 600;
+  background: white;
+  padding: 11px;
+  border-radius: 22px;
+  border-bottom-right-radius: 1px;
+}
+
+.pirate img{
+    width: 160px;
+}
+
 .word,
 .letter {
   height: 146%;
