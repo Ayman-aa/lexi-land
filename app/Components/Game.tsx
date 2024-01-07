@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import generateWord from "../helpers/generateWord";
 
@@ -11,13 +11,13 @@ interface GameProps {
 }
 
 const Game: React.FC<GameProps> = ({ gameState, setGameState, level, onClose }: GameProps) => {
-  const correct = generateWord(gameState, level);
+  const correct = useMemo(() => generateWord(gameState, level), [gameState, level]);
   const [finishTime, setFinishTime] = useState<number>(0);
   const [word, setWord] = useState<string[]>([]);
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
   const [newword, setnewword] = useState("");
   useEffect(() => {
-      setWord(correct.split("").sort(() => Math.random() - 0.5));
+      setWord(correct?.split("").sort(() => Math.random() - 0.5).sort(() => Math.random() - 0.5));
   }, []);
 
   useEffect(() => {
@@ -26,7 +26,6 @@ const Game: React.FC<GameProps> = ({ gameState, setGameState, level, onClose }: 
     }, 1000);
     return () => clearInterval(interval);
   }, []);
-
   const handleLetterClick = (clickedLetter: string, myword: string[]) => {
     myword.splice(myword.indexOf(clickedLetter), 1);
     setSelectedLetters((prevLetters) => [...prevLetters, clickedLetter]);
@@ -53,8 +52,9 @@ const Game: React.FC<GameProps> = ({ gameState, setGameState, level, onClose }: 
       if (words == correct) {
         toast.success("congratulations!");
         const newGameState = { ...gameState };
+        newGameState.levels[level - 1].finishtime = finishTime;
+        newGameState.levels[level - 1].word = correct;
         newGameState.levels[level - 1].state = "completed";
-        newGameState.levels[level - 1].time = finishTime;
         newGameState.levels[level].state = "current";
         setGameState(newGameState);
       } else toast.error("Incorrect word!");
@@ -72,7 +72,7 @@ const Game: React.FC<GameProps> = ({ gameState, setGameState, level, onClose }: 
         </div>
         <div className="word"></div>
         <div className="letter">
-          {word.map((letter, index) => (
+          {word?.map((letter, index) => (
             <div
               key={index}
               className="div-letter"

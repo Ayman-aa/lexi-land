@@ -7,6 +7,16 @@ const map = (
     min2: number,
     max2: number,
 ) => {
+    return parseInt(String(((value - min1) * (max2 - min2)) / (max1 - min1) + min2));
+}
+
+const mapFloat = (
+    value: number,
+    min1: number,
+    max1: number,
+    min2: number,
+    max2: number,
+) => {
     return ((value - min1) * (max2 - min2)) / (max1 - min1) + min2;
 }
 
@@ -20,12 +30,15 @@ const map = (
 // \boldsymbol{maxT =: 60}
 export default function generateWord(gameState: any, level: number) {
     if (level === 1) {
-        return words[map(Math.random(), 0, 1, 0, 30)];
+        return words[0];
     }
-    const finishedTimeList = gameState.levels.splice(0, level).forEach((currLevel: any) => {
-        return currLevel.finishtime * map(words.indexOf(currLevel.word), 0, words.length, 0, 1);
+    const finishedTimeList = gameState.levels.slice(0, level - 1).map((currLevel: any) => {
+        return currLevel.finishtime;
     });
-    const avgTime = finishedTimeList.reduce((a: number, b: number) => a + b) / finishedTimeList.length;
-    const wordIndex = map(avgTime, 0, 60, 0, words.length);
+    let avgTime = finishedTimeList[0];
+    if (finishedTimeList.length > 1)
+        avgTime = finishedTimeList.reduce((a: number, b: number) => a + b) / finishedTimeList.length;
+    const wordIndex = map(avgTime, 60, 0, 0, words.length);
+    console.log(finishedTimeList, wordIndex, avgTime)
     return words[wordIndex];
 };
