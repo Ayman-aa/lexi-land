@@ -2,14 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 body {
-  background: linear-gradient(to bottom, #40c0f5 0%, #ADD8E6 100%);
+  background: linear-gradient(to bottom, #40c0f5 0%, #add8e6 100%);
 }
 
 .Game {
-  background-image: url('../public/image0.jpg');
+  background-image: url("../public/image0.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
@@ -24,7 +22,8 @@ body {
   align-items: center;
 }
 
-.word, .letter {
+.word,
+.letter {
   height: 146%;
   width: 100%;
   display: flex;
@@ -41,15 +40,14 @@ body {
   color: white;
 }
 
-.letter p:hover
-{
+.letter p:hover {
   color: black;
 }
 
 .word p {
   font-size: calc(2cm - 11px);
   background: linear-gradient(to bottom, #40c0f5 0%, #00a6dc 100%);
-  
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,50 +62,50 @@ body {
 .game-level {
   /* display: flex; */
   justify-content: flex-start;
-  margin-top: 15px;
-  background: #ffda8c;
+  margin-top: 25px;
+  background: #e8c477;
   /* padding: 9px; */
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 43px;
-  height: 43px;
+  width: 55px;
+  height: 55px;
   box-shadow: 1px black;
 }
 
 .game-level span {
-  font-size: 28px;
+  font-size: 40px;
   font-weight: 600;
   color: white;
-  margin-right: 3px;
+  margin-right: 1px;
 }
 
 .close-level {
   /* display: flex; */
   justify-content: flex-start;
-  margin-top: -40px;
-  margin-right: -900px;
-  background: #ffda8c;
+  margin-top: -35px;
+  margin-right: -1050px;
+  background: #e8c477;
   /* padding: 9px; */
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  width: 45px;
-  height: 60px;
+  width: 60px;
+  height: 75px;
   box-shadow: 1px black;
   cursor: pointer;
 }
 
 .close-level span {
-  font-size: 28px;
+  font-size: 40px;
   font-weight: 600;
   color: white;
 }
 
 .div-letter {
-  background: linear-gradient(to bottom, #40c0f5 0%, #ADD8E6 100%);
+  background: linear-gradient(to bottom, #40c0f5 0%, #add8e6 100%);
   width: 3cm;
   display: flex;
   align-items: center;
@@ -117,7 +115,7 @@ body {
   cursor: pointer;
 }
 
-#clickword
-{
+#clickword {
   cursor: pointer;
 }
+

@@ -1,67 +1,76 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import generateWord from "../helpers/generateWord";
 
 interface GameProps {
-    level: number;
-    onClose: () => void;
+  gameState: any;
+  level: number;
+  setGameState: (newGameState: any) => void;
+  onClose: () => void;
 }
 
-const Game: React.FC<GameProps> = ({ level, onClose }: GameProps) => {
-    const correct = "ANIMAL"
+const Game: React.FC<GameProps> = ({ gameState, setGameState, level, onClose }: GameProps) => {
+  const correct = generateWord(gameState, level);
+  const [finishTime, setFinishTime] = useState<number>(0);
   const [word, setWord] = useState<string[]>([]);
   const [selectedLetters, setSelectedLetters] = useState<string[]>([]);
   const [newword, setnewword] = useState("");
   useEffect(() => {
-    setWord(["N", "L", "A", "M", "A", "I"]);
+      setWord(correct.split("").sort(() => Math.random() - 0.5));
   }, []);
 
-  const handleLetterClick = (clickedLetter: string, myword : string[]) => {
-    myword.splice(myword.indexOf(clickedLetter),1)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFinishTime((prevTime) => prevTime + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleLetterClick = (clickedLetter: string, myword: string[]) => {
+    myword.splice(myword.indexOf(clickedLetter), 1);
     setSelectedLetters((prevLetters) => [...prevLetters, clickedLetter]);
     const container = document.querySelector(".word");
     const letterBox = document.createElement("p");
-    letterBox.innerText = clickedLetter
-    container!.appendChild(letterBox)
-    letterBox.addEventListener("click", ()=>{
-        letterBox.remove();
-        let word : string = "";
-        for (let i = 0; i != container?.children.length; i++)
-        {
-            word += container!.children[i]!.innerHTML;
-        }
-        setnewword(word);
-        setWord((prevLetters) => [...prevLetters, clickedLetter]);
+    letterBox.innerText = clickedLetter;
+    container!.appendChild(letterBox);
+    letterBox.addEventListener("click", () => {
+      letterBox.remove();
+      let word: string = "";
+      for (let i = 0; i != container?.children.length; i++) {
+        word += container!.children[i]!.innerHTML;
+      }
+      setnewword(word);
+      setWord((prevLetters) => [...prevLetters, clickedLetter]);
     });
-    let words : string = "";
-    for (let i = 0; i != container?.children.length; i++)
-    {
-        words += container!.children[i]!.innerHTML;
+    let words: string = "";
+    for (let i = 0; i != container?.children.length; i++) {
+      words += container!.children[i]!.innerHTML;
     }
     setnewword(words);
-    setWord(myword)
-    if (word.length == 0)
-    {
-        if (words == correct)
-        {
-            toast.success('congratulations!');
-        }
-        else 
-            toast.error("Incorrect word!");
+    setWord(myword);
+    if (word.length == 0) {
+      if (words == correct) {
+        toast.success("congratulations!");
+        const newGameState = { ...gameState };
+        newGameState.levels[level - 1].state = "completed";
+        newGameState.levels[level - 1].time = finishTime;
+        newGameState.levels[level].state = "current";
+        setGameState(newGameState);
+      } else toast.error("Incorrect word!");
     }
-};
+  };
 
   return (
     <>
       <div className="Game">
         <div className="game-level">
-            <span>{level}</span>
+          <span>{level}</span>
         </div>
         <div className="close-level" onClick={onClose}>
-            <span>X</span>
+          <span>X</span>
         </div>
-        <div className="word">
-        </div>
+        <div className="word"></div>
         <div className="letter">
           {word.map((letter, index) => (
             <div
@@ -72,7 +81,7 @@ const Game: React.FC<GameProps> = ({ level, onClose }: GameProps) => {
               <p>{letter}</p>
             </div>
           ))}
-           <Toaster />
+          <Toaster />
         </div>
       </div>
     </>
